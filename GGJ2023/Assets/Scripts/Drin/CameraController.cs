@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        Focus();
+        // Focus();
     }
 
     private void Update()
@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             transform.Translate(-180, 0, 0);
-            Focus();
+            // Focus();
         }
     }
 
