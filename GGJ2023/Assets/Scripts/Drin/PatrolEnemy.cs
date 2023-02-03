@@ -6,14 +6,18 @@ public class PatrolEnemy : MonoBehaviour
 {
     private Rigidbody2D body;
 
-    private bool patroling = true, shooting = false, canShoot = false;
+    public float moveSpeed = 10;
 
-    public Transform groundCheck, bulletHole;
+    public float switchRadius = 0.5f;
+    private bool patroling = true;
 
-    public LayerMask groundMask, playerLayer;
+    public Transform groundCheck;
+
+    public LayerMask groundMask, playerLayer, switchlayer;
 
     public float groundCheckRadius;
 
+    private bool recentlySwitched = false;
     public int dir = 1;
 
     private void Start()
@@ -26,11 +30,16 @@ public class PatrolEnemy : MonoBehaviour
         if (!patroling)
             return;
 
-        if (!Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask))
+        if (Physics2D.OverlapCircle(transform.position, switchRadius, switchlayer))
         {
-            Switch();
-            body.velocity = new Vector2(0, body.velocity.y);
+            if (!recentlySwitched) {
+                Switch();
+                body.velocity = new Vector2(0, body.velocity.y);
+                recentlySwitched = true;
+            }
         }
+        else
+            recentlySwitched = false;
 
         body.AddForce(Vector2.right * dir * moveSpeed);
     }
