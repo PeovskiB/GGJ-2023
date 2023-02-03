@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
 {
     public static CameraController instance;
 
-    public Stage currentStage, lastStage;
+    // public Stage currentStage, lastStage;
 
     public AnimationCurve shakeCurve;
     public float smoothTime;
@@ -42,67 +42,67 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public static void SetStage(Stage newStage)
-    {
-        if (newStage.stageData == instance.currentStage.stageData)
-            return;
+    // public static void SetStage(Stage newStage)
+    // {
+    //     if (newStage.stageData == instance.currentStage.stageData)
+    //         return;
 
-        instance.lastStage = instance.currentStage;
+    //     instance.lastStage = instance.currentStage;
 
-        instance.currentStage = newStage;
+    //     instance.currentStage = newStage;
 
-        instance.Focus();
-    }
+    //     instance.Focus();
+    // }
 
-    private void Focus()
-    {
-        if (currentStage == null)
-            return;
+    // private void Focus()
+    // {
+    //     if (currentStage == null)
+    //         return;
 
-        kickBackDir = Vector2.zero;
+    //     kickBackDir = Vector2.zero;
 
-        transform.rotation = Quaternion.identity;
+    //     transform.rotation = Quaternion.identity;
 
-        shaking = false;
-        trauma = 0f;
+    //     shaking = false;
+    //     trauma = 0f;
 
-        if (lastFocusUp != null)
-            StopCoroutine(lastFocusUp);
+    //     if (lastFocusUp != null)
+    //         StopCoroutine(lastFocusUp);
 
-        lastFocusUp = StartCoroutine(FocusUp());
-    }
+    //     lastFocusUp = StartCoroutine(FocusUp());
+    // }
 
-    IEnumerator FocusUp()
-    {
-        Vector3 goal = (Vector2)currentStage.stageData.startingPoint.position;
+    // IEnumerator FocusUp()
+    // {
+    //     Vector3 goal = (Vector2)currentStage.stageData.startingPoint.position;
 
-        //if (instance.lastStage != null)
-            //instance.lastStage.entrance.isTrigger = false;
+    //     //if (instance.lastStage != null)
+    //         //instance.lastStage.entrance.isTrigger = false;
 
-        goal.z = -10;
+    //     goal.z = -10;
 
-        while (Vector2.Distance(transform.position, goal) > 0.5f)
-        {
-            trauma = 0;
+    //     while (Vector2.Distance(transform.position, goal) > 0.5f)
+    //     {
+    //         trauma = 0;
 
-            transform.position = Vector3.SmoothDamp(transform.position, goal, ref vel, smoothTime);
+    //         transform.position = Vector3.SmoothDamp(transform.position, goal, ref vel, smoothTime);
 
-            yield return new WaitForEndOfFrame();
-        }
+    //         yield return new WaitForEndOfFrame();
+    //     }
 
-        if (instance.lastStage != null)
-            StartCoroutine(EntranceEnabledReset());
-        yield break;
-    }
+    //     if (instance.lastStage != null)
+    //         StartCoroutine(EntranceEnabledReset());
+    //     yield break;
+    // }
 
-    IEnumerator EntranceEnabledReset()
-    {
-        instance.lastStage.entrance.enabled = false;
-        yield return new WaitForEndOfFrame();
-        instance.lastStage.entrance.enabled = true;
-        //instance.lastStage.entrance.isTrigger = true;
-        yield break;
-    }
+    // IEnumerator EntranceEnabledReset()
+    // {
+    //     instance.lastStage.entrance.enabled = false;
+    //     yield return new WaitForEndOfFrame();
+    //     instance.lastStage.entrance.enabled = true;
+    //     //instance.lastStage.entrance.isTrigger = true;
+    //     yield break;
+    // }
 
     public static void Shake(float addTrauma)
     {
