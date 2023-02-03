@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Entrance"))
-            CameraController.SetStage(collision.GetComponentInParent<Stage>());
+        // if (collision.CompareTag("Entrance"))
+            // CameraController.SetStage(collision.GetComponentInParent<Stage>());
         if (collision.CompareTag("Key"))
         {
             collision.transform.position = transform.position;
