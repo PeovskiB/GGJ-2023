@@ -818,27 +818,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.013515592, y: -3.3789895}
   m_Size: {x: 0.5270312, y: 1.9976821}
   m_Direction: 0
---- !u!50 &333718085
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333718079}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &422670685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,11 +1102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6432609861764478826, guid: 42303504a4fc90a43bc5178df9876bf2, type: 3}
       propertyPath: m_Size.x
-      value: 2.3657408
+      value: 0.9980469
       objectReference: {fileID: 0}
     - target: {fileID: 6432609861764478826, guid: 42303504a4fc90a43bc5178df9876bf2, type: 3}
       propertyPath: m_Size.y
-      value: 5.3148413
+      value: 2.2421987
       objectReference: {fileID: 0}
     - target: {fileID: 6432609861764478826, guid: 42303504a4fc90a43bc5178df9876bf2, type: 3}
       propertyPath: m_Sprite
