@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     public class ItemStats{
         public int additionalJumps = 0;
         public bool rootClearing = false;
+        public int additionalMaxMana;
+        public float additionalManaRegen;
 
         public void ObtainItem(int id){
             switch (id){
@@ -15,9 +17,19 @@ public class PlayerStats : MonoBehaviour
                 case 0:
                     additionalJumps += 1;
                     break;
-                //Acid    
+                //Root Clearing  
                 case 1:
                     rootClearing = true;
+                    break;  
+                //Max Mana
+                case 2:
+                    additionalMaxMana += 50;
+                    SpellSystem.instance.UpdateManaStats();
+                    break;
+                //Mana Regen
+                case 3:
+                    additionalManaRegen += 30f;
+                    SpellSystem.instance.UpdateManaStats();
                     break;    
                 default:
                     Debug.LogWarning("Error: invalid item id");
@@ -31,6 +43,8 @@ public class PlayerStats : MonoBehaviour
         ItemStats itemStats = new ItemStats();
 
         int baseJumps = 1;
+        int baseMaxMana = 100;
+        float baseManaRegen = 20f;
         
         public void ObtainItem(int id){
             itemStats.ObtainItem(id);
@@ -43,6 +57,14 @@ public class PlayerStats : MonoBehaviour
 
         public bool GetCanDestroyRoots(){
             return itemStats.rootClearing;
+        }
+
+        public int GetMaxMana(){
+            return baseMaxMana + itemStats.additionalMaxMana;
+        }
+
+        public float GetManaRegen(){
+            return baseManaRegen + itemStats.additionalManaRegen;
         }
 
     }
@@ -58,13 +80,13 @@ public class PlayerStats : MonoBehaviour
         else{
             Destroy(gameObject);
         }
-            
+        stats = new Stats();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        stats = new Stats();
+        
     }
 
 }
