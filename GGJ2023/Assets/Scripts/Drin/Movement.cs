@@ -13,14 +13,9 @@ public class Movement : MonoBehaviour
 {
     [SerializeField]
     public MovementInfo info;
-
-    public AudioClip jumpClip, dashClip;
-
-    public AudioSource movementSound, landingSound;
-
+    public AudioSource movementSource, landingSource, jumpSource, dashSource;
     public Transform groundCheck;
     public float groundCheckRadius;
-
     public LayerMask groundLayer;
 
     private Rigidbody2D body;
@@ -39,7 +34,7 @@ public class Movement : MonoBehaviour
         dir = Input.GetAxisRaw("Horizontal");
 
         if (Mathf.Abs(dir) < 0.3f)
-            movementSound.Stop();
+            movementSource.Stop();
 
         if (dir != 0)
             lastDir = dir;
@@ -61,7 +56,7 @@ public class Movement : MonoBehaviour
 
             if (!lastGrounded)
             {
-                landingSound.Play();
+                landingSource.Play();
                 CameraController.Shake(info.landTrauma);
             }
             canDash = true;
@@ -73,7 +68,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            movementSound.Stop();
+            movementSource.Stop();
 
             if (canDJump)
             {
@@ -113,7 +108,8 @@ public class Movement : MonoBehaviour
         {
             body.AddForce(Vector2.up * info.jumpForce, ForceMode2D.Impulse);
             CameraController.Shake(info.jumpTrauma);
-            AudioController.Play(jumpClip);
+            jumpSource.Stop();
+            jumpSource.Play();
             jumped = false;
         }
 
@@ -126,15 +122,16 @@ public class Movement : MonoBehaviour
                 StartCoroutine(DashUp());
                 dashed = false;
                 CameraController.Shake(info.dashTrauma);
-                AudioController.Play(dashClip);
+                dashSource.Stop();
+                dashSource.Play();
                 Utils.Freeze(info.dashFreeze);
                 return;
             }
 
             if (Mathf.Abs(dir) > 0.3f && grounded)
             {
-                if (!movementSound.isPlaying)
-                    movementSound.Play();
+                if (!movementSource.isPlaying)
+                    movementSource.Play();
             }
 
             body.AddForce(newDir);

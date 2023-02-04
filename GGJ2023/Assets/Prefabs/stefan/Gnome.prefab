@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6069055809738172932}
-  - component: {fileID: 6069055809738172933}
   - component: {fileID: 6069055809738172938}
   - component: {fileID: 6069055809738172939}
+  - component: {fileID: 6069055809935256116}
   m_Layer: 0
   m_Name: Gnome
   m_TagString: Untagged
@@ -35,32 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6069055809738172933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6069055809738172935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ee82ee88e0e2a741bab63778e9d918b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  switchRadius: 0.5
-  groundCheck: {fileID: 6069055809738172932}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 193
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  switchlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  groundCheckRadius: 0.39
-  dir: 1
 --- !u!50 &6069055809738172938
 Rigidbody2D:
   serializedVersion: 4
@@ -74,7 +48,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -97,7 +71,33 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.013866842, y: -0.013866901}
   serializedVersion: 2
-  m_Radius: 0.6664021
+  m_Radius: 1.2204287
+--- !u!114 &6069055809935256116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6069055809738172935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c09a1486c4f69c47b4456e813b74d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 15
+  switchRadius: 0.5
+  groundCheck: {fileID: 6069055809738172932}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 65
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  switchlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  groundCheckRadius: 0
+  dir: 1
 --- !u!1 &6069055811481014733
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 6069055811481014733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.6263, y: 2.6263, z: 2.6263}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6069055809738172932}
