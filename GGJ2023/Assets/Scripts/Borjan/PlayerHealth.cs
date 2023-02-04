@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-   [SerializeField] private int maxHealth; 
+    [SerializeField] private int maxHealth; 
 
-   [SerializeField] private Image[] hearts; 
-   [SerializeField] private Sprite fullHeart; 
-   [SerializeField] private Sprite halfHeart; 
-   [SerializeField] private Sprite emptyHeart; 
+    [SerializeField] private Image[] hearts; 
+    [SerializeField] private Sprite fullHeart; 
+    [SerializeField] private Sprite halfHeart; 
+    [SerializeField] private Sprite emptyHeart; 
+
+    [SerializeField] private Transform respawnLocation; 
+
+    private float immunityTimer = 0f;
+    [SerializeField] private float immunityTime = 0.8f;
 
     private int health;
     public int Health{
@@ -22,8 +27,9 @@ public class PlayerHealth : MonoBehaviour
                 health = maxHealth;
             }else if(value < 0){
                 health = 0;
-                //AudioManager.instance.PlaySound("PlayerHurt");
+                //AudioManager.instance.PlaySound("PlayerDeath");
             }else if(value < health){
+                immunityTimer = immunityTime;
                 health = value;
                 //AudioManager.instance.PlaySound("PlayerHurt");
             }
@@ -55,7 +61,14 @@ public class PlayerHealth : MonoBehaviour
         Health = maxHealth;
     }
 
+    private void Update(){
+        if(immunityTimer > 0)
+            immunityTimer -= Time.deltaTime;
+    }
+
     public void TakeDamage(int x){
+        if(immunityTimer > 0)
+            return;
         Health -= x;
         if(health <= 0)
            Death();
@@ -67,7 +80,8 @@ public class PlayerHealth : MonoBehaviour
     }
 
     private void Death(){
-        Destroy(gameObject);
+        Health = maxHealth;
+        transform.position = respawnLocation.position;
     }
 
 }
