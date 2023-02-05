@@ -9,6 +9,7 @@ public class SpellSystem : MonoBehaviour
     [SerializeField]private Image barImage;
 
     private bool freezeToggled;
+    public static float freezeEffect;
 
     //Drain for the freeze spell
     float manaDrain = 30f;
@@ -29,6 +30,7 @@ public class SpellSystem : MonoBehaviour
         int maxMana = PlayerStats.instance.stats.GetMaxMana();
         float manaRegen  = PlayerStats.instance.stats.GetManaRegen();
         mana = new Mana(maxMana, manaRegen, barImage);
+	freezeEffect = 1f;
     }
 
     void Update(){   
@@ -51,9 +53,9 @@ public class SpellSystem : MonoBehaviour
             freezeToggled = mana.CheckIfCanDrain();
         //For testing puproses
         if(freezeToggled)
-            Time.timeScale = 0.5f;  
+            freezeEffect = 0f;  
         else
-            Time.timeScale = 1f;         
+            freezeEffect = 1f;         
     }
 
     public void UpdateManaStats(){
