@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 1
   name: Acid
   description: Clears Roots
-  icon: {fileID: 21300000, guid: adad381c72e58154691f6cb40aacb75a, type: 3}
+  icon: {fileID: 21300000, guid: 64402fdb115b3d54c9dd7b9e796c184f, type: 3}
