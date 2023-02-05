@@ -5,11 +5,11 @@ public class CameraController : MonoBehaviour
 {
     public static CameraController instance;
     public Transform target;
-    private Vector3 vel;
+    private Vector3 vervel, horvel;
     private float baseSize;
     public AnimationCurve shakeCurve;
     private Camera cam;
-    public float smoothTime;
+    public float smoothTimeHor, smoothTimeVer;
     public float fovShake;
     public float traumaMult = 1f;
     private float trauma;
@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     public float positionShake;
     private bool shaking = false;
     public Vector2 kickBackDir;
+    public Vector2 offset;
 
     void Awake()
     {
@@ -32,11 +33,15 @@ public class CameraController : MonoBehaviour
         if (target == null)
             return;
 
-        Vector3 goal = (Vector2)target.position;
+        Vector3 goal = (Vector2)target.position + offset;
+        Vector3 otherGoal = goal;
 
-        goal.z = transform.position.z;
+        otherGoal.z = goal.z = transform.position.z;
 
-        transform.position = Vector3.SmoothDamp(transform.position, goal, ref vel, smoothTime * Time.smoothDeltaTime);
+        Vector3 newPosHor = Vector3.SmoothDamp(transform.position, goal, ref horvel, smoothTimeHor * Time.smoothDeltaTime);
+        Vector3 newPosVer = Vector3.SmoothDamp(transform.position, otherGoal, ref vervel, smoothTimeVer * Time.smoothDeltaTime);
+
+        transform.position = new Vector3(newPosHor.x, newPosVer.y, goal.z);
     }
     public static void Shake(float addTrauma)
     {

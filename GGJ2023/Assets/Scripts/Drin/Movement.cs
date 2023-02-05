@@ -17,6 +17,10 @@ public class Movement : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
+    public static Movement instance;
+    public bool died = false;
+
+    public Animator anim;
 
     private Rigidbody2D body;
 
@@ -27,17 +31,27 @@ public class Movement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+
+        if (instance == null) instance = this;
     }
 
     void Update()
     {
+        if (died)
+        {
+            return;
+            body.velocity = Vector2.zero;
+        }
         dir = Input.GetAxisRaw("Horizontal");
 
         if (Mathf.Abs(dir) < 0.3f)
             movementSource.Stop();
 
         if (dir != 0)
+        {
+            if (dir != lastDir) Switch();
             lastDir = dir;
+        }
 
         Collider2D[] grounds = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -50,10 +64,9 @@ public class Movement : MonoBehaviour
             grounded = true;
         }
 
+        anim.SetBool("grounded", grounded);
         if (grounded)
         {
-            canDJump = true;
-
             if (!lastGrounded)
             {
                 landingSource.Play();
@@ -61,6 +74,7 @@ public class Movement : MonoBehaviour
             }
             canDash = true;
             body.velocity = new Vector2(body.velocity.x, 0f);
+            anim.SetBool("moving", (body.velocity.x != 0));
             if (Input.GetButton("Jump"))
                 jumped = true;
             else
@@ -69,26 +83,12 @@ public class Movement : MonoBehaviour
         else
         {
             movementSource.Stop();
+            // anim.SetBool("moving", false);
 
-            if (canDJump)
-            {
-                if (Input.GetButtonDown("Jump"))
-                {
-                    jumped = true;
-                    canDJump = false;
-                    body.velocity = new Vector2(body.velocity.x, 0f);
-                    CameraController.Shake(info.dJumpTruama);
-                }
-                else
-                    jumped = false;
-            }
+            if (body.velocity.y < 0)
+                body.gravityScale = info.fallGravity;
             else
-            {
-                if (body.velocity.y < 0)
-                    body.gravityScale = info.fallGravity;
-                else
-                    body.gravityScale = info.jumpGravity;
-            }
+                body.gravityScale = info.jumpGravity;
         }
 
         if (canDash && Input.GetButtonDown("Dash") && !isDashing)
@@ -102,6 +102,11 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (died)
+        {
+            return;
+            body.velocity = Vector2.zero;
+        }
         Vector2 newDir = new Vector2(dir * info.speed, 0f);
 
         if (jumped)
@@ -161,5 +166,12 @@ public class Movement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+    private void Switch()
+    {
+        Vector3 newScl = transform.localScale;
+        newScl.x = Mathf.Sign(dir);
+
+        transform.localScale = newScl;
     }
 }
