@@ -16,7 +16,7 @@ TagManager:
   - Switch
   - Player
   - Item
-  - 
+  - Boss
   - 
   - 
   - 
@@ -39,20 +39,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background Underground
-    uniqueID: 3294437731
-    locked: 0
   - name: Background
     uniqueID: 2548615975
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Default Underground
-    uniqueID: 2249053751
-    locked: 0
-  - name: Player
-    uniqueID: 2130236659
     locked: 0
   - name: Foreground
     uniqueID: 2405601601
