@@ -39,8 +39,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background Underground
+    uniqueID: 2495626103
+    locked: 0
   - name: Background
     uniqueID: 2548615975
+    locked: 0
+  - name: Player
+    uniqueID: 1296869759
+    locked: 0
+  - name: Default Underground
+    uniqueID: 4144744937
     locked: 0
   - name: Default
     uniqueID: 0
