@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 2
   name: Tear
   description: Max Mana
-  icon: {fileID: 21300000, guid: 3ef6fb29da1309543958c7f0a5bc5f8c, type: 3}
+  icon: {fileID: 21300000, guid: 64402fdb115b3d54c9dd7b9e796c184f, type: 3}
