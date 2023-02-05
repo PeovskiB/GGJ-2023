@@ -20484,6 +20484,8 @@ GameObject:
   - component: {fileID: 1726398463138671768}
   - component: {fileID: 6432609860058502784}
   - component: {fileID: 6432609860058502787}
+  - component: {fileID: 1559348674}
+  - component: {fileID: 1559348675}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -20605,3 +20607,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec388b8011648de44b24544701c4fdb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1559348674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5888962205348746073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b8fc13ceb9b0c4db35ddebc3915115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1559348675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5888962205348746073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bd72fba1cfabc49b95cd64a5e76f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  hearts: []
+  fullHeart: {fileID: 0}
+  halfHeart: {fileID: 0}
+  emptyHeart: {fileID: 0}
+  respawnLocation: {fileID: 0}
+  immunityTime: 0.8

@@ -5,83 +5,107 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth; 
+    public static PlayerHealth instance;
+    [SerializeField] private int maxHealth;
 
-    [SerializeField] private Image[] hearts; 
-    [SerializeField] private Sprite fullHeart; 
-    [SerializeField] private Sprite halfHeart; 
-    [SerializeField] private Sprite emptyHeart; 
+    [SerializeField] private Image[] hearts;
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite halfHeart;
+    [SerializeField] private Sprite emptyHeart;
 
-    [SerializeField] private Transform respawnLocation; 
+    [SerializeField] private Transform respawnLocation;
 
     private float immunityTimer = 0f;
     [SerializeField] private float immunityTime = 0.8f;
 
     private int health;
-    public int Health{
-        get{
+    public int Health
+    {
+        get
+        {
             return health;
         }
-        set{
-            if(value > maxHealth){
+        set
+        {
+            if (value > maxHealth)
+            {
                 health = maxHealth;
-            }else if(value < 0){
+            }
+            else if (value < 0)
+            {
                 health = 0;
                 //AudioManager.instance.PlaySound("PlayerDeath");
-            }else if(value < health){
+            }
+            else if (value < health)
+            {
                 immunityTimer = immunityTime;
                 health = value;
                 //AudioManager.instance.PlaySound("PlayerHurt");
             }
-            else{
+            else
+            {
                 health = value;
             }
 
-            for(int i = 0; i < hearts.Length; i++){
-                if(i < health/2){
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                if (i < health / 2)
+                {
                     hearts[i].sprite = fullHeart;
-                }else if(i < health/2  + health%2){
+                }
+                else if (i < health / 2 + health % 2)
+                {
                     hearts[i].sprite = halfHeart;
                 }
-                else{
+                else
+                {
                     hearts[i].sprite = emptyHeart;
                 }
 
-                if(i<maxHealth/2){
+                if (i < maxHealth / 2)
+                {
                     hearts[i].enabled = true;
-                }else{
+                }
+                else
+                {
                     hearts[i].enabled = false;
                 }
             }
-           
+
         }
     }
 
-    private void Start() {
+    private void Start()
+    {
         Health = maxHealth;
+        instance = this;
     }
 
-    private void Update(){
-        if(immunityTimer > 0)
+    private void Update()
+    {
+        if (immunityTimer > 0)
             immunityTimer -= Time.deltaTime;
     }
 
-    public void TakeDamage(int x){
-        if(immunityTimer > 0)
+    public void TakeDamage(int x)
+    {
+        if (immunityTimer > 0)
             return;
         Health -= x;
-        if(health <= 0)
-           Death();
+        if (health <= 0)
+            Death();
     }
 
-    public void AddTwoMaxHP(){
+    public void AddTwoMaxHP()
+    {
         maxHealth += 2;
         Health += 2;
     }
 
-    private void Death(){
+    private void Death()
+    {
         Health = maxHealth;
-        transform.position = respawnLocation.position;
+        GameState.Die();
     }
 
 }

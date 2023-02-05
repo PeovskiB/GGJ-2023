@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fadeout
+  - BossTrigger
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Player
   - Item
   - Boss
-  - 
+  - BossTrigger
   - 
   - 
   - 

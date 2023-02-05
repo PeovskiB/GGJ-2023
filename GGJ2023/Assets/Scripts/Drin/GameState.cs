@@ -30,20 +30,23 @@ public class GameState : MonoBehaviour
 
     void Update()
     {
-        if (anim != null || state == State.Menu) return;
+        if (anim != null || state == State.Menu || win) return;
 
         anim = GameObject.FindWithTag("Fadeout").GetComponent<Animator>();
     }
 
     public IEnumerator DeathRoutine()
     {
-        anim.SetBool("died", true);
+        anim.SetBool("fadeout", true);
         for (float i = 0; i < 1f; i += Time.deltaTime)
         {
             yield return null;
         }
 
-        SceneManager.LoadScene(1);
+        if (win)
+            SceneManager.LoadScene(2);
+        else
+            SceneManager.LoadScene(1);
         yield break;
     }
 
@@ -52,11 +55,22 @@ public class GameState : MonoBehaviour
         instance.SwitchState(State.Playing);
     }
 
+    private bool win = false;
+
+    public static void WinScreen()
+    {
+        instance.StartCoroutine(instance.DeathRoutine());
+        instance.win = true;
+        Movement.instance.died = true;
+        WormController.Stop();
+        // Utils.Freeze(3f);
+    }
+
     public static void Die()
     {
         instance.SwitchState(State.Death);
         Movement.instance.died = true;
-        Utils.Freeze(3f);
+        // Utils.Freeze(3f);
     }
 
     private void SwitchState(State newState)

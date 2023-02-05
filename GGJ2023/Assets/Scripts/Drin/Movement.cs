@@ -39,8 +39,8 @@ public class Movement : MonoBehaviour
     {
         if (died)
         {
-            return;
             body.velocity = Vector2.zero;
+            return;
         }
         dir = Input.GetAxisRaw("Horizontal");
 

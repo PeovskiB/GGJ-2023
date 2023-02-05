@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class WormController : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class WormController : MonoBehaviour
     private int tid = 0;
     private Transform target;
     private bool resetNow = false;
+    private bool start = false;
+    public float timer = 0f;
+    public static WormController instance;
+    public TextMeshProUGUI countdown;
+
 
     public void SetTarget(Transform goal)
     {
@@ -23,13 +29,38 @@ public class WormController : MonoBehaviour
         SetTarget(targetList[tid]);
     }
 
+    public void TriggerBoss()
+    {
+        start = true;
+    }
+
     private void Start()
     {
         SetTarget(targetList[0]);
+        if (instance == null) instance = this;
     }
-    // Update is called once per frame
+    public static void Stop()
+    {
+        instance.start = false;
+        Tentacles.instance.stop = true;
+    }
+    void TriggerWin()
+    {
+        GameState.WinScreen();
+    }
+    public float timeLimit;
     void LateUpdate()
     {
+        if (!start) return;
+        timer += Time.deltaTime;
+        if (timer < timeLimit)
+            countdown.text = (timeLimit - timer).ToString("##") + "s";
+        if (timer >= timeLimit)
+        {
+            countdown.text = "Victory!";
+            TriggerWin();
+        }
+
         Vector2 dir = target.position - transform.position;
         float agl = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion rot = Quaternion.AngleAxis(agl, Vector3.forward);
