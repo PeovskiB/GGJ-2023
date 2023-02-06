@@ -104,6 +104,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Death()
     {
+        transform.position = respawnLocation.position;
         Health = maxHealth;
         GameState.Die();
     }

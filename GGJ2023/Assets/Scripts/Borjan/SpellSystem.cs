@@ -53,9 +53,9 @@ public class SpellSystem : MonoBehaviour
             freezeToggled = mana.CheckIfCanDrain();
         //For testing puproses
         if(freezeToggled)
-            freezeEffect = 0f;  
+            Time.timeScale = 0.5f;  
         else
-            freezeEffect = 1f;         
+            Time.timeScale = 1f;  
     }
 
     public void UpdateManaStats(){
