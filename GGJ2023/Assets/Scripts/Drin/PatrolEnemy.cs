@@ -20,9 +20,28 @@ public class PatrolEnemy : MonoBehaviour
     private bool recentlySwitched = false;
     public int dir = 1;
 
+    [SerializeField] private float switchTime = 3f;
+    private float switchTimer;
+
+    private BoxCollider2D damageCollider;
+
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        damageCollider = GetComponent<BoxCollider2D>();
+    }
+
+    void Update(){
+        if(SpellSystem.freezeMulti == 0)
+            damageCollider.enabled = false;
+        else
+            damageCollider.enabled = true;
+        
+        switchTimer -= Time.deltaTime * SpellSystem.freezeMulti;
+        if(switchTimer <= 0){
+            switchTimer = switchTime;
+            Switch();
+        }    
     }
 
     private void FixedUpdate()
@@ -41,7 +60,7 @@ public class PatrolEnemy : MonoBehaviour
         else
             recentlySwitched = false;
 
-        body.AddForce(Vector2.right * dir * moveSpeed);
+        body.AddForce(Vector2.right * dir * moveSpeed * SpellSystem.freezeMulti);
     }
 
     private void Switch()
