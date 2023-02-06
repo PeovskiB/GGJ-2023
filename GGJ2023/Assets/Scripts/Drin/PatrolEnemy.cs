@@ -23,12 +23,12 @@ public class PatrolEnemy : MonoBehaviour
     [SerializeField] private float switchTime = 3f;
     private float switchTimer;
 
-    private BoxCollider2D damageCollider;
+    private CircleCollider2D damageCollider;
 
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        damageCollider = GetComponent<BoxCollider2D>();
+        damageCollider = GetComponent<CircleCollider2D>();
     }
 
     void Update(){
