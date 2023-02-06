@@ -24,18 +24,24 @@ public class PatrolEnemy : MonoBehaviour
     private float switchTimer;
 
     private CircleCollider2D damageCollider;
+    private BoxCollider2D platformCollider;
 
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         damageCollider = GetComponent<CircleCollider2D>();
+        platformCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update(){
-        if(SpellSystem.freezeMulti == 0)
+        if(SpellSystem.freezeMulti == 0){
             damageCollider.enabled = false;
-        else
+            platformCollider.enabled = true;
+        }
+        else{
             damageCollider.enabled = true;
+            platformCollider.enabled = false;
+        }
         
         switchTimer -= Time.deltaTime * SpellSystem.freezeMulti;
         if(switchTimer <= 0){
