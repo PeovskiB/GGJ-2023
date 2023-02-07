@@ -59,10 +59,13 @@ public class GameState : MonoBehaviour
 
     public static void WinScreen()
     {
-        instance.StartCoroutine(instance.DeathRoutine());
-        instance.win = true;
-        Movement.instance.died = true;
-        WormController.Stop();
+        // instance.StartCoroutine(instance.DeathRoutine());
+        // instance.win = true;
+        // Movement.instance.died = true;
+        // WormController.Stop();
+        SceneManager.LoadScene(sceneBuildIndex:2);
+
+
         // Utils.Freeze(3f);
     }
 

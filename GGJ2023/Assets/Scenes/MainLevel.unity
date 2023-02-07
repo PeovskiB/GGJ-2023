@@ -5839,7 +5839,7 @@ PrefabInstance:
       objectReference: {fileID: 1146127306}
     - target: {fileID: 5675898586275075204, guid: 0190c9496cffa334fb62676e23ac6cda, type: 3}
       propertyPath: spd
-      value: 2.33
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 5675898586275075204, guid: 0190c9496cffa334fb62676e23ac6cda, type: 3}
       propertyPath: targetDist
