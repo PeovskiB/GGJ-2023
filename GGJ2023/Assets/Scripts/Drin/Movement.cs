@@ -27,16 +27,21 @@ public class Movement : MonoBehaviour
     private float dir, lastDir;
     [SerializeField]
     public bool jumped, grounded, lastGrounded, dashed, isDashing, canDash, canDJump;
+    [SerializeField] public float dashCD = 2f;
+    private float dashCDTimer;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
 
         if (instance == null) instance = this;
+        else Destroy(gameObject);
+        dashCDTimer = 0;
     }
 
     void Update()
     {
+        dashCDTimer -= Time.deltaTime;
         if (died)
         {
             body.velocity = Vector2.zero;
@@ -91,10 +96,11 @@ public class Movement : MonoBehaviour
                 body.gravityScale = info.jumpGravity;
         }
 
-        if (canDash && Input.GetButtonDown("Dash") && !isDashing)
+        if (canDash && Input.GetButtonDown("Dash") && !isDashing && dashCDTimer <= 0)
         {
             dashed = true;
             canDash = false;
+            dashCDTimer = dashCD;
         }
 
         lastGrounded = grounded;
@@ -129,7 +135,7 @@ public class Movement : MonoBehaviour
                 CameraController.Shake(info.dashTrauma);
                 dashSource.Stop();
                 dashSource.Play();
-                Utils.Freeze(info.dashFreeze);
+                //Utils.Freeze(info.dashFreeze);
                 return;
             }
 

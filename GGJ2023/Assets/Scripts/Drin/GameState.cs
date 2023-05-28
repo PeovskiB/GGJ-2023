@@ -33,26 +33,34 @@ public class GameState : MonoBehaviour
         if (anim != null || state == State.Menu || win) return;
 
         anim = GameObject.FindWithTag("Fadeout").GetComponent<Animator>();
+        Debug.Log(anim);
     }
 
     public IEnumerator DeathRoutine()
     {
         anim.SetBool("fadeout", true);
-        for (float i = 0; i < 1f; i += Time.deltaTime)
-        {
-            yield return null;
-        }
+        // for (float i = 0; i < 1f; i += Time.deltaTime)
+        // {
+        //     yield return null;
+        // }
+        yield return new WaitForSecondsRealtime(1f);
 
         if (win)
             SceneManager.LoadScene(2);
-        else
+        else{
             SceneManager.LoadScene(1);
+        }
+
+        Movement.instance.died = false;
+        state = State.Playing;    
+
         yield break;
     }
 
     public static void MenuToGame()
     {
         instance.SwitchState(State.Playing);
+        MusicPlayer.PlayGameMusic();
     }
 
     private bool win = false;
@@ -72,7 +80,7 @@ public class GameState : MonoBehaviour
     public static void Die()
     {
         instance.SwitchState(State.Death);
-        Movement.instance.died = true;
+        //Movement.instance.died = true;
         // Utils.Freeze(3f);
     }
 
@@ -87,7 +95,7 @@ public class GameState : MonoBehaviour
                 }
                 else if (instance.state == State.Death)
                 {
-                    instance.StartCoroutine(instance.DeathRoutine());
+                    instance.StartCoroutine("DeathRoutine");
                 }
                 break;
         }
