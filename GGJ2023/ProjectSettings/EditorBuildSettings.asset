@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Borjan/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Borjan/Cutscene.unity
+    guid: 0c942bdf8a1e037449a47d468c0e432b
   m_configObjects: {}

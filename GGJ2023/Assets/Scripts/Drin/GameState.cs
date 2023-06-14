@@ -30,7 +30,7 @@ public class GameState : MonoBehaviour
 
     void Update()
     {
-        if (anim != null || state == State.Menu || win) return;
+        if (anim != null || state == State.Menu || win || SceneManager.GetActiveScene().buildIndex == 3) return;
 
         anim = GameObject.FindWithTag("Fadeout").GetComponent<Animator>();
         Debug.Log(anim);
@@ -59,7 +59,8 @@ public class GameState : MonoBehaviour
 
     public static void MenuToGame()
     {
-        instance.SwitchState(State.Playing);
+        //instance.SwitchState(State.Playing);
+        SceneManager.LoadScene(3);
         MusicPlayer.PlayGameMusic();
     }
 
@@ -84,7 +85,7 @@ public class GameState : MonoBehaviour
         // Utils.Freeze(3f);
     }
 
-    private void SwitchState(State newState)
+    public void SwitchState(State newState)
     {
         switch (newState)
         {
