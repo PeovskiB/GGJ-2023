@@ -46,7 +46,7 @@ public class WormController : MonoBehaviour
     }
     void TriggerWin()
     {
-        GameState.WinScreen();
+        GameState.instance.WinScreen();
     }
     public float timeLimit;
     void LateUpdate()

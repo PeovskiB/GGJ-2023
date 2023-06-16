@@ -31,4 +31,9 @@ public class MusicPlayer : MonoBehaviour
         instance.audioSource.Stop();
         instance.audioSource.PlayOneShot(instance.gameMusic, 1f);
     }
+
+    public static void PlayMenuMusic(){
+        instance.audioSource.Stop();
+        instance.audioSource.PlayOneShot(instance.menuMusic, 1f);
+    }
 }

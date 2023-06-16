@@ -17,6 +17,7 @@ public class GameState : MonoBehaviour
     public State state;
     public static GameState instance;
     private Animator anim;
+    private Animator rootAnimator = null;
     void Awake()
     {
         if (instance != null) Destroy(gameObject);
@@ -30,10 +31,16 @@ public class GameState : MonoBehaviour
 
     void Update()
     {
-        if (anim != null || state == State.Menu || win || SceneManager.GetActiveScene().buildIndex == 3) return;
+        //if (anim != null || state == State.Menu || win || SceneManager.GetActiveScene().buildIndex == 3) return;
 
-        anim = GameObject.FindWithTag("Fadeout").GetComponent<Animator>();
-        Debug.Log(anim);
+        //anim = GameObject.FindWithTag("Fadeout").GetComponent<Animator>();
+        //Debug.Log(anim);
+
+        if(rootAnimator == null){
+            if(GameObject.FindGameObjectWithTag("Roots") != null)
+                rootAnimator = GameObject.FindGameObjectWithTag("Roots").GetComponent<Animator>();
+        }
+        
     }
 
     public IEnumerator DeathRoutine()
@@ -66,16 +73,24 @@ public class GameState : MonoBehaviour
 
     private bool win = false;
 
-    public static void WinScreen()
+    public void WinScreen()
     {
         // instance.StartCoroutine(instance.DeathRoutine());
         // instance.win = true;
         // Movement.instance.died = true;
         // WormController.Stop();
-        SceneManager.LoadScene(sceneBuildIndex:2);
+        
 
+        rootAnimator.SetBool("Win", true);
+        Destroy(GameObject.FindGameObjectWithTag("Boss"));
+        Camera.main.gameObject.transform.GetComponentInParent<CameraController>().offset.y = 40;
+        Invoke("LoadWin", 5.5f);
 
         // Utils.Freeze(3f);
+    }
+
+    private void LoadWin(){
+        SceneManager.LoadScene(sceneBuildIndex:2);
     }
 
     public static void Die()

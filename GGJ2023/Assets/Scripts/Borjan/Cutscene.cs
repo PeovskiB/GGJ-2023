@@ -20,6 +20,11 @@ public class Cutscene : MonoBehaviour
         UIImage.sprite = images[pageNumber];
     }
 
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
+            Next();
+    }
+
 
     public void Next(){
         pageNumber++;
