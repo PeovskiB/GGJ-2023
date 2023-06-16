@@ -658,7 +658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -146.5}
+  m_AnchoredPosition: {x: 0, y: -179.4}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1687632103
@@ -792,7 +792,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 400}
+  m_SizeDelta: {x: 351, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2125527151
 MonoBehaviour:
@@ -808,5 +808,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 450399291}
   images:
-  - {fileID: 21300000, guid: 44673d7aa4b500a42a19c74b42b20b57, type: 3}
-  - {fileID: 21300000, guid: 648ad0496cff4824cb13cc4629f8d754, type: 3}
+  - {fileID: 21300000, guid: 1040b3e672fa17144835950c8e8039eb, type: 3}
+  - {fileID: 21300000, guid: 6dafa7e2be5af7443b493d6be2d8401f, type: 3}
+  - {fileID: 21300000, guid: 992d44538b295b64bb72628e8748e865, type: 3}
+  - {fileID: 21300000, guid: 2ab5cf4ddc5049d44ab96a2fcabb25b3, type: 3}
+  - {fileID: 21300000, guid: 51cda1d98a287244484f65ffd313138f, type: 3}
